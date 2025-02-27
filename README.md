@@ -1,2 +1,8 @@
-# razvoj-softvera-backend-2025
-Backend izvorni kod sa predmeta Razvoj Softvera u skolskoj 2024/25
+# Razvoj Softvera - Backend - 2024/25
+
+Koriscene tehnologije:
+
+- TypeScript
+- MySQL
+- Express
+- dotenv
