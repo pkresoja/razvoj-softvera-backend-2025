@@ -1,0 +1,11 @@
+{
+  "name": "razvoj-softvera-backend-2025",
+  "module": "src/index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
