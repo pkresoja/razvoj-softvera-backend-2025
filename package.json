@@ -2,10 +2,25 @@
   "name": "razvoj-softvera-backend-2025",
   "module": "src/index.ts",
   "type": "module",
+  "scripts": {
+    "dev": "bun --watch ./src/index.ts"
+  },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/cors": "^2.8.17",
+    "@types/dotenv": "^8.2.3",
+    "@types/express": "^5.0.0",
+    "@types/morgan": "^1.9.9"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.13.0",
+    "typeorm": "^0.3.21"
   }
 }
