@@ -9,8 +9,8 @@ export class Model {
   @Column("varchar", { name: "name", length: 255 })
   name: string;
 
-  @Column("tinyint", { name: "active", unsigned: true, default: () => "'1'" })
-  active: number;
+  @Column("boolean", { name: "active", default: () => "'true'" })
+  active: boolean;
 
   @OneToMany(() => Vehicle, (vehicle) => vehicle.model)
   vehicles: Vehicle[];

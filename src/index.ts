@@ -5,6 +5,8 @@ import { AppDataSource } from './db'
 import { ClientRoute } from './routes/client.route'
 import { ArticleRoute } from './routes/article.route'
 import { InvoiceRoute } from './routes/invoice.route'
+import { ModelRoute } from './routes/model.route'
+import { VehicleRoute } from './routes/vehicle.route'
 
 const app = express()
 app.use(express.json())
@@ -24,3 +26,5 @@ AppDataSource.initialize()
 app.use('/api/client', ClientRoute)
 app.use('/api/article', ArticleRoute)
 app.use('/api/invoice', InvoiceRoute)
+app.use('/api/model', ModelRoute)
+app.use('/api/vehicle', VehicleRoute)
