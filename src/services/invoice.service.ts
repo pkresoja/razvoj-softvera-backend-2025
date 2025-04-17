@@ -5,22 +5,18 @@ import { Invoice } from "../entities/Invoice";
 const repo = AppDataSource.getRepository(Invoice)
 
 export class InvoiceService {
-    static async getInvoices() {
+    static async getInvoicesByVehicleId(vehcile: number) {
         return await repo.find({
             select: {
                 invoiceId: true,
                 createdAt: true,
+                updatedAt: true,
                 generatedAt: true,
-                payedAt: true
+                paidAt: true,
             },
             where: {
+                vehicleId: vehcile,
                 deletedAt: IsNull()
-            },
-            relations: {
-                vehicle: {
-                    client: true,
-                    model: true
-                }
             }
         })
     }
@@ -29,15 +25,6 @@ export class InvoiceService {
         const data = await repo.findOne({
             where: {
                 deletedAt: IsNull()
-            },
-            relations: {
-                vehicle: {
-                    client: true,
-                    model: true
-                },
-                invoiceArticles: {
-                    article: true
-                }
             }
         })
 
@@ -45,5 +32,19 @@ export class InvoiceService {
             throw new Error('NOT_FOUND')
 
         return data
+    }
+
+    static async updateInvoice(id: number, model: Invoice) {
+        const inv = await this.getInvoiceById(id)
+        console.log(model.vehicleId)
+        inv.vehicleId = model.vehicleId
+        inv.updatedAt = new Date()
+        console.log(await repo.save(inv))
+    }
+
+    static async deleteInvoice(id: number) {
+        const inv = await this.getInvoiceById(id)
+        inv.deletedAt = new Date()
+        repo.save(inv)
     }
 }

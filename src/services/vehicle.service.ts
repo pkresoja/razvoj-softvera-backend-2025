@@ -1,8 +1,10 @@
 import { IsNull, Like } from "typeorm";
 import { AppDataSource } from "../db";
 import { Vehicle } from "../entities/Vehicle";
+import { Client } from "../entities/Client";
 
 const repo = AppDataSource.getRepository(Vehicle)
+const clientRepo = AppDataSource.getRepository(Client)
 
 export class VehicleService {
     static async getVehicleByClientId(id: number, search: string) {
@@ -46,6 +48,45 @@ export class VehicleService {
                     deletedAt: IsNull()
                 }
             ],
+            relations: {
+                model: true
+            }
+        })
+    }
+
+    static async getVehiclesByClientFromVehicleId(id: number) {
+        const vehicle = await repo.findOne({
+            select: {
+                vehicleId: true,
+                clientId: true
+            },
+            where: {
+                vehicleId: id
+            }
+        })
+
+        if (vehicle == undefined)
+            throw new Error('NOT_FOUND')
+
+        return await repo.find({
+            select: {
+                vehicleId: true,
+                clientId: true,
+                model: {
+                    modelId: true,
+                    name: true
+                },
+                vin: true,
+                regPlate: true,
+                year: true
+            },
+            where: {
+                clientId: vehicle!.clientId,
+                client: {
+                    deletedAt: IsNull()
+                },
+                deletedAt: IsNull()
+            },
             relations: {
                 model: true
             }

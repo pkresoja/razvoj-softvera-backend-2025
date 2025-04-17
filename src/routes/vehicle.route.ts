@@ -14,6 +14,15 @@ VehicleRoute.get('/client/:id', async (req, res) => {
     }
 })
 
+VehicleRoute.get('/client/vehicle/:id', async (req, res) => {
+    try {
+        const id = Number.parseInt(req.params.id)
+        res.json(await VehicleService.getVehiclesByClientFromVehicleId(id))
+    } catch (e: any) {
+        errorReponse(res, e)
+    }
+})
+
 VehicleRoute.get('/:id', async (req, res) => {
     try {
         const id = Number.parseInt(req.params.id)

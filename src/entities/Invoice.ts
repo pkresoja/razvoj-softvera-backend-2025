@@ -25,8 +25,8 @@ export class Invoice {
   })
   createdAt: Date;
 
-  @Column("datetime", { name: "payed_at", nullable: true })
-  payedAt: Date | null;
+  @Column("datetime", { name: "paid_at", nullable: true })
+  paidAt: Date | null;
 
   @Column("datetime", { name: "generated_at", nullable: true })
   generatedAt: Date | null;
