@@ -13,10 +13,28 @@ InvoiceRoute.get('/vehicle/:id', async (req, res) => {
     }
 })
 
+InvoiceRoute.get('/:id/details', async (req, res) => {
+    try {
+        const id = Number.parseInt(req.params.id)
+        res.json(await InvoiceService.getInvoiceDetailsById(id))
+    } catch (e: any) {
+        errorReponse(res, e)
+    }
+})
+
 InvoiceRoute.get('/:id', async (req, res) => {
     try {
         const id = Number.parseInt(req.params.id)
         res.json(await InvoiceService.getInvoiceById(id))
+    } catch (e: any) {
+        errorReponse(res, e)
+    }
+})
+
+InvoiceRoute.post('/', async (req, res) => {
+    try {
+        await InvoiceService.createInvoice(req.body)
+        res.status(204).send()
     } catch (e: any) {
         errorReponse(res, e)
     }
