@@ -49,6 +49,7 @@ export class InvoiceService {
         if (data == null)
             throw new Error('NOT_FOUND')
 
+        data.invoiceArticles = data.invoiceArticles.filter(ia => ia.deletedAt == null)
         return data
     }
 

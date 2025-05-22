@@ -7,3 +7,10 @@ export function errorReponse(rsp: Response, e: Error = new Error("BAD_REQUEST"))
         timestamp: new Date()
     })
 }
+
+export function isDefined<T>(data: T | null) {
+    if (data == null)
+        throw new Error('NOT_FOUND')
+
+    return data
+}

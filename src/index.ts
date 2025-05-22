@@ -7,8 +7,10 @@ import { ArticleRoute } from './routes/article.route'
 import { InvoiceRoute } from './routes/invoice.route'
 import { ModelRoute } from './routes/model.route'
 import { VehicleRoute } from './routes/vehicle.route'
+import { configDotenv } from 'dotenv'
 
 const app = express()
+configDotenv()
 app.use(express.json())
 app.use(cors())
 app.use(morgan('short'))
@@ -16,7 +18,7 @@ app.use(morgan('short'))
 AppDataSource.initialize()
     .then(() => {
         console.log('Connected to database')
-        const port = 44000
+        const port = Number(process.env.SERVER_PORT) ?? 3000
         app.listen(port, () =>
             console.log(`Listening on port ${port}`)
         )
